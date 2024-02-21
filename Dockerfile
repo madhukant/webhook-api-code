@@ -1,18 +1,17 @@
-# DockerfileCopy code# Base image
-FROM python:3.9-slim
+# Use the official Python image as the base image
+FROM python:3.8
 
-# Working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy requirements file and install dependencies
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy the application files into the working directory
+COPY . /app
 
-# Copy the rest of the project files
-COPY . .
+# Install the application dependencies
+RUN pip install -r requirements.txt
 
-# Expose the server port
-EXPOSE 8080
+# Expose port 5000 to the outside world
+EXPOSE 5000
 
-# Command to start the server
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+# Define the entry point for the container
+CMD ["flask", "run", "--host=0.0.0.0"]
