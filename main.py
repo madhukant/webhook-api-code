@@ -28,6 +28,14 @@ def webhook():
                     # You can handle other types of events like postbacks, etc.
         return 'OK'
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    # Add your health check logic here
+    # For example, check if the database connection is available
+    # If everything is fine, return 200 OK
+    return 'OK', 200
+
+
 def send_message(recipient_id, message_text):
     # Send message back to Facebook user
     # You need to implement this based on Facebook Messenger API
