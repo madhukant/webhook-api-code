@@ -14,6 +14,7 @@ def webhook():
     elif request.method == 'POST':
         # Handling incoming messages
         data = request.get_json()
+        print("data=>", data)
         if data['object'] == 'page':
             for entry in data['entry']:
                 for messaging_event in entry['messaging']:
@@ -22,6 +23,8 @@ def webhook():
                     if messaging_event.get('message'):
                         # Handle incoming message
                         message_text = messaging_event['message']['text']
+
+                        print("message_text=>", message_text)
                         # Process the message
                         # You can add your custom logic here
                         send_message(sender_id, "Echo: " + message_text)  # Echo back the received message
