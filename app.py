@@ -35,6 +35,7 @@ def webhook():
             return 'OK'
     except Exception as e:
         print('Error Came while serving with Error =>', e)
+        return f'Error Came -> {e}'
 
 @app.route('/health', methods=['GET'])
 def health_check():
