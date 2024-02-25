@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify
+import logging
 
 app = Flask(__name__)
 
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
-    print('Madhukant started....................................')
-    print('Request Came 1 =>', request.method)
-    print('Request Came 2=>', str(request.get_data()))
+    logging.info('Madhukant started....................................')
+    logging.info(f'Request Came 1 => {request.method}')
+    logging.info(f'Request Came 2=> {str(request.get_data())}')
     try:
         if request.method == 'GET':
             # Verification process
@@ -18,7 +19,7 @@ def webhook():
         elif request.method == 'POST':
             # Handling incoming messages
             data = request.get_json()
-            print("data=>", data)
+            logging.info(f"data=> {data}")
             if data['object'] == 'page':
                 for entry in data['entry']:
                     for messaging_event in entry['messaging']:
@@ -28,14 +29,14 @@ def webhook():
                             # Handle incoming message
                             message_text = messaging_event['message']['text']
 
-                            print("message_text=>", message_text)
+                            logging.info(f"message_text=> {message_text}")
                             # Process the message
                             # You can add your custom logic here
                             send_message(sender_id, "Echo: " + message_text)  # Echo back the received message
                         # You can handle other types of events like postbacks, etc.
             return 'OK'
     except Exception as e:
-        print('Error Came while serving with Error =>', e)
+        logging.info(f'Error Came while serving with Error => {e}')
         return f'Error Came -> {e}'
 
 @app.route('/health', methods=['GET'])
