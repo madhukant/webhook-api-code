@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the application files into the working directory
 COPY . /app
 
+#ENV VARIABLE
+ENV FLASK_DEBUG=1
+
 # Install the application dependencies
 RUN pip install -r requirements.txt
 
@@ -14,4 +17,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Define the entry point for the container
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["flask", "--debug", "run", "--host=0.0.0.0"]
