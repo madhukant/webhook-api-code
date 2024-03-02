@@ -73,10 +73,10 @@ def verify_webhook(hub_verify_token: str):
         raise HTTPException(status_code=403, detail="Invalid verification token")
 
 @app.post("/webhook")
-async def handle_webhook(message: Message):
+async def handle_webhook(message):
     try:
         # Handling incoming messages
-        message_text = message.text
+        message_text = message
         print('message_text=>', message_text)
         # Process the message
         # You can add your custom logic here
