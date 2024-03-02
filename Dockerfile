@@ -17,4 +17,5 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Define the entry point for the container
-CMD ["flask", "--debug", "run", "--host=0.0.0.0"]
+# CMD ["flask", "--debug", "run", "--host=0.0.0.0"]
+CMD ["python", "main.py"]
